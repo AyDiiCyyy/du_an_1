@@ -3800,3 +3800,16 @@ input.num-product::-webkit-inner-spin-button {
   }
 
 }
+
+
+  /* chi tiết sp  */
+
+.bl {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 40px 40px 0 40px;
+}
+
+.coi {
+  padding: 0 0 50px 0;
+}
