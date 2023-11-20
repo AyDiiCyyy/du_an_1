@@ -19,11 +19,18 @@ require_once "pdo.php";
 //     return pdo_query($sql, $id_danhhmuc);
 // }
 
-function load_sp_home($id_danhhmuc = null,$maxsp){
-    if($maxsp == ""){
-        $maxsp = 0;
+function load_sp_home($id_danhhmuc = null,$end, $start){
+    if($end == ""){
+        $end = 0;
     }
-    $maxsp+=8;
+    $end+=8;
+    if($start == ""){
+        $start = 0;
+    }
+    if($start != 0){
+        $start = $start*$end;
+    }
+
     $sql = "SELECT sanpham.* FROM sanpham 
     INNER JOIN danhmuc ON danhmuc.id_danhmuc = sanpham.id_danhmuc 
     WHERE danhmuc.trang_thai=0 ";
@@ -33,7 +40,7 @@ function load_sp_home($id_danhhmuc = null,$maxsp){
     if($id_danhhmuc!==null){
         $sql .= "AND sanpham.id_danhmuc = ? ";
     }
-    $sql .= "ORDER BY id_sp DESC LIMIT 0,$maxsp";
+    $sql .= "ORDER BY id_sp DESC LIMIT $start,$end";
     if($id_danhhmuc!==null){
         return pdo_query($sql, $id_danhhmuc);
     }else{

@@ -5,16 +5,16 @@
     include_once "model/sanpham.php";
 
     if(!isset($_GET['xemthem'])){
-        $maxsp=4;
+        $end=4;
     }else if (isset($_GET['xemthem'])&&$_GET['xemthem']==""){
-        $maxsp=4;
+        $end=4;
     }else{
-        $maxsp=$_GET['xemthem']+4;
+        $end=$_GET['xemthem']+4;
         
     }
     $top2_dm = load_2_dm();
     $load_all_dm = load_all_dm(); 
-    $load_16sp = load_sp_home((isset($_GET['id_danhmuc']) ? $_GET['id_danhmuc'] : ''),(isset($_GET['xemthem']) ? $_GET['xemthem'] : ''));
+    $load_16sp = load_sp_home((isset($_GET['id_danhmuc']) ? $_GET['id_danhmuc'] : ''),(isset($_GET['xemthem']) ? $_GET['xemthem'] : ''),(isset($_GET['start']) ? $_GET['start'] : ''));
 
         $act = $_GET["act"] ?? "";
         switch ($act) {

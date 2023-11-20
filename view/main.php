@@ -405,7 +405,7 @@
         <!-- Load more -->
 
         <div class="flex-c-m flex-w w-full p-t-45">
-            <a href="?act=home&xemthem=<?= $maxsp ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+            <a href="?act=home&xemthem=<?= $end ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                 Xem Thêm
             </a>
         </div>
