@@ -3813,3 +3813,10 @@ input.num-product::-webkit-inner-spin-button {
 .coi {
   padding: 0 0 50px 0;
 }
+
+
+/* css lỏ */
+
+.tex_chan{
+  text-decoration: none !important;
+}

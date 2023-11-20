@@ -93,7 +93,7 @@
                 <div class="block1 wrap-pic-w">
                     <img src="uploads/upload_dm/<?=$dm['img']?>" alt="IMG-BANNER">
 
-                    <a href="?act=dmsp&id_danhmuc=<?= $dm['id_danhmuc'] ?>"
+                    <a style="text-decoration: none;" href="?act=dmsp&id_danhmuc=<?= $dm['id_danhmuc'] ?>"
                         class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
                             <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -136,13 +136,13 @@
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?= (!isset($_GET['id_danhmuc'])) ? "how-active1" : "" ?>">
-                 <a style="color: #888;" href="?act=home">Tất cả sản phẩm</a>   
+                 <a style="color: #888; text-decoration: none;" href="?act=home">Tất cả sản phẩm</a>   
     
                 </button>
                 <?php foreach($load_all_dm as $danhmuc) : ?>
                 
                  <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 <?= (isset($_GET['id_danhmuc'])&&$_GET['id_danhmuc']==$danhmuc['id_danhmuc']) ? "how-active1" : "" ?>">
-                    <a style="color: #888;" href="?act=dmsp&id_danhmuc=<?= $danhmuc['id_danhmuc'] ?>"><?= $danhmuc['name'] ?></a>   
+                    <a class="tex_chan" style="color: #888;" href="?act=dmsp&id_danhmuc=<?= $danhmuc['id_danhmuc'] ?>"><?= $danhmuc['name'] ?></a>   
                 </button>
 
                 <?php endforeach ?>
@@ -359,14 +359,14 @@
         <!-- sanpham -->
         <div class="row isotope-grid">
             <?php foreach($load_16sp as $sp) : ?>
-            <a href="?act=sanphamct&id_sp=<?= $sp['id_sp'] ?>">
+            <a class="tex_chan" href="?act=sanphamct&id_sp=<?= $sp['id_sp'] ?>">
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
                             <img src="uploads/upload_sp/<?=$sp['img']?>" alt="IMG-PRODUCT">
     
-                            <a href="?act=sanphamct&id_sp=<?= $sp['id_sp'] ?>"
+                            <a style="text-decoration: none;" href="?act=sanphamct&id_sp=<?= $sp['id_sp'] ?>"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
                                 Mua Ngay
                             </a>

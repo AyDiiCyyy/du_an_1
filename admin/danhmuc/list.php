@@ -10,17 +10,20 @@
                                 <th></th>
                                 <th>MÃ LOẠI</th>
                                 <th>TÊN LOẠI</th>
+                                <th>TRẠNG THÁI</th>
+                                <th>HÌNH ẢNH</th>
                                 <th></th>
                             </tr>
                             <?php
                                 foreach ($listdanhmuc as $danhmuc) {
-                                    extract($danhmuc);
-                                    $suadm="index.php?act=suadm&id=".$id;
-                                    $xoadm="index.php?act=xoadm&id=".$id;
+                                    $suadm="?act=suadm&id=".$danhmuc['id_danhmuc'];
+                                    $xoadm="?act=xoadm&id=".$danhmuc['id_danhmuc'];
                                     echo '<tr>
                                     <td><input type="checkbox" name="" id=""></td>
-                                    <td>'.$id.'</td>
-                                    <td>'.$name.'</td>
+                                    <td>'.$danhmuc['id_danhmuc'].'</td>
+                                    <td>'.$danhmuc['name'].'</td>
+                                    <td>'.($danhmuc['trang_thai']?"Hiển Thị":"Ẩn").'</td>
+                                    <td><img height = 100px; src="../uploads/upload_dm/'.$danhmuc['img'].'" alt=""></td>
                                     <td> <a href="'.$suadm.'"><input type="button" value="Sửa"></a> 
                                         <a href="'.$xoadm.'"><input type="button" value="Xóa"></a></td>
                                 </tr>';
@@ -35,7 +38,7 @@
                     <div class="row mb10 ">
                         <input class="mr20" type="button" value="CHỌN TẤT CẢ">
                         <input class="mr20" type="button" value="BỎ CHỌN TẤT CẢ">
-                        <a href="index.php?act=adddm"> <input class="mr20" type="button" value="NHẬP THÊM"></a>
+                        <a href="?act=adddm"> <input class="mr20" type="button" value="NHẬP THÊM"></a>
                     </div>
                 </form>
             </div>
