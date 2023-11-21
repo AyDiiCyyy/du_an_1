@@ -1,2 +1,3 @@
+<script src="../js/validate.js"></script>
 </body>
 </html>
