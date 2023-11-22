@@ -18,11 +18,11 @@ function check_add_dm(event){
         document.querySelector(".js_img_er").innerHTML="";
     }
     
-    if(i==0){
-        document.querySelector(".js_er").classList.remove("an");
-    }else{
-        document.querySelector(".js_er").classList.add("an");
-    }
+    // if(i==0){
+    //     document.querySelector(".js_er").classList.remove("an");
+    // }else{
+    //     document.querySelector(".js_er").classList.add("an");
+    // }
 }
 document.querySelector(".jsthem_dm").addEventListener("click",check_add_dm);
 

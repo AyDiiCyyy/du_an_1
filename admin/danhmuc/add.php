@@ -36,7 +36,9 @@
 
             <a href="?act=listdm"><input class="mr20" type="button" value="DANH SÁCH"></a>
           </div>
-            <span class="js_er">Thêm danh mục thành công</span>
+            <!-- <span class="js_er an">Thêm danh mục thành công</span> -->
+            
+            
         </form>
       </div>
     </div>
