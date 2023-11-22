@@ -16,7 +16,7 @@
                             </tr>
                             <?php
                                 foreach ($listdanhmuc as $key=>$danhmuc) {
-                                    $suadm="?act=suadm&id=".$danhmuc['id_danhmuc'];
+                                    $suadm="?act=suadm&sua=".$danhmuc['id_danhmuc'];
                                     $xoadm="?act=listdm&delete=".$danhmuc['id_danhmuc'];
                                     echo '<tr>
                                     <td><input type="checkbox" name="id_danhmuc[]" value="'.$danhmuc['id_danhmuc'].'" class="checkbox"></td>

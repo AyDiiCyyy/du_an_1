@@ -42,7 +42,23 @@ switch ($act) {
         $view = "danhmuc/add.php";
          break;
     case "suadm":
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            if(isset($_FILES['img'])&&$_FILES['img']['name']!=""){
+                $img=$_FILES['img']['name'];
+                move_uploaded_file($_FILES['tmp_name'],"../uploads/upload_dm/$img");
+            }else{
+                $img=$_POST['img_ol'];
+            }
+            update_dm($_POST['tenloai'], $_POST['trang_thai'], $img, $_POST['id_danhmuc']);
+            // header("location: ?act=listdm");
+            echo '<script>alert("Sửa danh mục thành công")</script>';
+            echo '<script>window.location.href="?act=listdm"</script>';
+            die;
+        }
 
+        if(isset($_GET['sua'])&&$_GET['sua']!=""){
+            $dm=load_dm($_GET['sua']);
+        }
         $view = "danhmuc/update.php";
         break;
     case "xoadm":
