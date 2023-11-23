@@ -1,7 +1,7 @@
 <?php
 include "../model/pdo.php";
 include "../model/danhmuc_admin.php";
-
+include "../model/sanpham_admin.php";
 
 // controller
 
@@ -10,6 +10,9 @@ switch ($act) {
     case "":
         $view = "home.php";
         break;
+
+
+        // bắt đầu danh mục
     case "listdm":
         // xoá 1 danh mục
         if(isset($_GET['delete'])&& $_GET['delete']!="") {
@@ -61,8 +64,35 @@ switch ($act) {
         }
         $view = "danhmuc/update.php";
         break;
-    case "xoadm":
-        
+
+
+        // hết danh mục
+    case 'listsp':
+        // xoá 1 sp 
+        $slsp=cout_sp(isset($_POST['iddm'])?$_POST['iddm']:"", isset($_POST['kyw'])?$_POST['kyw']:"");
+        $slsp=intval(reset($slsp))/8; // lấy phần tử đầu tiên của mảng và biến thành số
+        $phan_trang= ceil($slsp); // làm tròn lên số gần nhất
+        if(isset($_GET['xoa'])&&$_GET['xoa']!=""){
+            delete_sp($_GET['xoa']);
+        }
+
+        // xoá nhiều sp
+        if(isset($_POST['xoacung'])&&$_POST['xoacung']!=""){
+            $id_sp= $_POST['id_sp'];
+            $id = "";
+            foreach($id_sp as $sp){
+                $id .= $sp.", ";
+            }
+            $id=rtrim($id, ", ");
+            delete_sp_muti($id);
+        }
+        $listdanhmuc=load_all_dm();
+        $listsanpham = load_sp(isset($_POST['iddm'])?$_POST['iddm']:"", isset($_POST['kyw'])?$_POST['kyw']:"", isset($_GET['page'])?$_GET['page']:"");
+        $view = "sanpham/list.php";
+        break;
+
+    case "suasp":
+        $view = "sanpham/update.php";
         break;
     case "home":
         $view = "home.php";

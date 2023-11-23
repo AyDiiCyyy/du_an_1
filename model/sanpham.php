@@ -33,7 +33,7 @@ function load_sp_home($id_danhhmuc = null,$end, $start){
 
     $sql = "SELECT sanpham.* FROM sanpham 
     INNER JOIN danhmuc ON danhmuc.id_danhmuc = sanpham.id_danhmuc 
-    WHERE danhmuc.trang_thai=0 ";
+    WHERE danhmuc.trang_thai=1 ";
     if ($id_danhhmuc === "") {
         $id_danhhmuc = null;
     }

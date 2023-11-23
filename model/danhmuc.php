@@ -12,11 +12,14 @@ function load_2_dm(){
 function load_all_dm(){
     $sql = "SELECT danhmuc.* , COUNT(sanpham.id_sp) AS SLSP FROM sanpham 
     INNER JOIN danhmuc ON danhmuc.id_danhmuc = sanpham.id_danhmuc
-    WHERE danhmuc.trang_thai = 0
+    WHERE danhmuc.trang_thai = 1
     GROUP BY sanpham.id_danhmuc
     HAVING SLSP > 0
     ORDER BY SLSP DESC LIMIT 0,8";
     return pdo_query($sql);
 }
+
+
+
 
 ?>
