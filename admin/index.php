@@ -2,7 +2,7 @@
 include "../model/pdo.php";
 include "../model/danhmuc_admin.php";
 include "../model/sanpham_admin.php";
-
+session_start();
 // controller
 
 $act = $_GET["act"] ?? "";
@@ -68,8 +68,14 @@ switch ($act) {
 
         // hết danh mục
     case 'listsp':
+        if(isset($_POST['iddm'])){
+            $_SESSION["listdanhmuc"]=$_POST['iddm'];
+        }
+        if(isset($_POST['kyw'])){
+            $_SESSION["kyw"]=trim($_POST['kyw']);
+        }
         // xoá 1 sp 
-        $slsp=cout_sp(isset($_POST['iddm'])?$_POST['iddm']:"", isset($_POST['kyw'])?$_POST['kyw']:"");
+        $slsp=cout_sp($_SESSION["listdanhmuc"]??"", $_SESSION['kyw']??"");
         $slsp=intval(reset($slsp))/8; // lấy phần tử đầu tiên của mảng và biến thành số
         $phan_trang= ceil($slsp); // làm tròn lên số gần nhất
         if(isset($_GET['xoa'])&&$_GET['xoa']!=""){
@@ -86,8 +92,13 @@ switch ($act) {
             $id=rtrim($id, ", ");
             delete_sp_muti($id);
         }
+        // $iddm=isset($_POST['iddm'])?$_POST['iddm']:"";
+        // $kyw=isset($_POST['kyw'])?$_POST['kyw']:"";
+        
+        // $_SESSION["listdanhmuc"]=isset($_POST['iddm'])?$_POST['iddm']:"";
+        // $_SESSION['kyw']=isset($_POST['kyw'])?$_POST['kyw']:"";
         $listdanhmuc=load_all_dm();
-        $listsanpham = load_sp(isset($_POST['iddm'])?$_POST['iddm']:"", isset($_POST['kyw'])?$_POST['kyw']:"", isset($_GET['page'])?$_GET['page']:"");
+        $listsanpham = load_sp($_SESSION["listdanhmuc"]??"", $_SESSION['kyw']??"", isset($_GET['page'])?$_GET['page']:"");
         $view = "sanpham/list.php";
         break;
 

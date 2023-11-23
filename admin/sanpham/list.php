@@ -3,14 +3,15 @@
         <h1>DANH SÁCH LOẠI HÀNG HÓA</h1>
     </div>
     <form action="?act=listsp" method="post">
-        <input type="text" name="kyw">
+        
+        <input type="text" name="kyw" value="<?= $_SESSION["kyw"]??"" ?>">
         <select name="iddm">
-            <option value="" selected>Tất cả</option>
+            <option value="" >Tất cả</option>
             <?php
 
             foreach ($listdanhmuc as $danhmuc) {
-
-                echo '<option value="' . $danhmuc['id_danhmuc'] . '">' . $danhmuc['name'] . '</option>';
+                $selected=($_SESSION["listdanhmuc"]!=""&&$_SESSION["listdanhmuc"]==$danhmuc['id_danhmuc'])?"selected":"";
+                echo '<option '.$selected.' value="' . $danhmuc['id_danhmuc'] . '">' . $danhmuc['name'] . ' </option>';
             }
 
             ?>
