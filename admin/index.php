@@ -101,7 +101,35 @@ switch ($act) {
         $listsanpham = load_sp($_SESSION["listdanhmuc"]??"", $_SESSION['kyw']??"", isset($_GET['page'])?$_GET['page']:"");
         $view = "sanpham/list.php";
         break;
+    case "addsp":
+        $listdanhmuc=load_all_dm();
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $date = date("Y-m-d H:i:s");
+            $name_img=$_FILES['hinh_chinh']['name'];
+            move_uploaded_file($_FILES['hinh_chinh']['tmp_name'], "../uploads/upload_sp/$name_img");
+            // xử lý biến thể size
+            $size=$_POST['size'];
+            $size=str_replace(" " , "" ,"$size"); // giá trị muốn tìm " " thay bằng "" trong chuỗi
+            $size=explode(',', $size); // chuyển chuỗi thành mảng
+            // xử lý biến thể color
+            $color=$_POST['color'];
+            $color=str_replace(" " , "" ,"$color");
+            $color=explode(',', $color);
 
+            $id=insert_sanpham($_POST['tensp'], $_POST['giasp'], $name_img, $date, $_POST['iddm'], $_POST['mota']);
+            insert_bienthe($size, $color,$id);
+            if(isset($_FILES['hinh_phu']['name'])&&$_FILES['hinh_phu']['name']!=""){
+                $name_phu=$_FILES['hinh_phu']['name'];
+                insert_img($name_phu, $id);
+                foreach ($name_phu as $key=>$value) {
+                    move_uploaded_file($_FILES['hinh_phu']['tmp_name'][$key], "../uploads/upload_sp/$value");       
+                }
+            }
+            echo '<script>alert("Thêm sản phẩm thành công")</script>';
+        }
+        $view = "sanpham/add.php";
+        break;
     case "suasp":
         $view = "sanpham/update.php";
         break;

@@ -43,7 +43,8 @@
                             <td><img height="100px" src="../uploads/upload_sp/<?= $sanpham['img'] ?>" alt=""></td>
                             <td><?= $sanpham['date'] ?></td>
                             <td><?= $sanpham['namedm'] ?></td>
-                            <td><a href="?act=suasp&sua=<?= $sanpham['id_sp'] ?>"><input type="button" value="Sửa"></a>
+                            <td>
+                                <a href="?act=suasp&sua=<?= $sanpham['id_sp'] ?>"><input type="button" value="Sửa"></a>
                                 <a href="?act=listsp&xoa=<?= $sanpham['id_sp'] ?>"><input type="button" value="Xoá"></a>
                             </td>
                         </tr>
@@ -69,7 +70,7 @@
                 <input class="mr20" type="button" value="CHỌN TẤT CẢ" id="checkall">
                 <input class="mr20" type="button" value="BỎ CHỌN TẤT CẢ" id="clearall">
                 <input class="mr20" id="delete_all" type="submit" value="XOÁ" name="xoacung">
-                <a href="index.php?act=addsp"> <input class="mr20" type="button" value="NHẬP THÊM"></a>
+                <a class="mr20" href="?act=addsp"> <input  type="button" value="NHẬP THÊM"></a>
             </div>
         </form>
     </div>

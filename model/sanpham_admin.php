@@ -40,4 +40,37 @@ function cout_sp($id_danhmuc, $kw){
     }
     return pdo_query_one($sql);
 }
+
+function insert_sanpham($name, $price, $img, $date, $id_danhmuc, $mota){
+    $sql = "INSERT INTO sanpham (name, price, img, date, id_danhmuc, mota) VALUES (?,?,?,?,?,?)";
+    return pdo_execute($sql, $name, $price, $img, $date, $id_danhmuc, $mota);
+    // $sql = "SET @last_customer_id = LAST_INSERT_ID()";
+    // return pdo_execute($sql);
+
+}
+function insert_img($name, $id_sp){
+    $sql="INSERT INTO img_phu (name,id_sp) VALUES ";
+    foreach ($name as $value) {
+        $sql.= "('$value', $id_sp),";
+    }
+    $sql=rtrim($sql,",");
+    pdo_execute($sql);
+}
+
+function insert_bienthe($size,$color,$id_sp){
+    $sql="INSERT INTO chitietsanpham (size,color,id_sp) VALUES ";
+    foreach ($size as $sz) {
+        foreach ($color as $mau){
+            $sql .= "('$sz','$mau', $id_sp), ";
+        }
+    }
+    $sql=rtrim($sql,", ");
+    pdo_execute($sql);
+}
+
+
+// function insert_img($name, $id_sp){
+//     $sql= "INSERT INTO img_phu (name,id_sp) VALUES (?,?)";
+//     pdo_execute($sql,$name,$id_sp);
+// }
 ?>

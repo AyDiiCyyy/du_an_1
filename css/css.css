@@ -492,3 +492,8 @@ font-size:2vv;
   .an {
     display: none;
   }
+
+  .err{
+    color: red !important;
+    font-size: 20px;
+  }
