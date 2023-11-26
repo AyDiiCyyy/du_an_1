@@ -34,7 +34,7 @@
             <input class="mr20 jsthem_dm" type="submit" name="them_dm" value="THÊM MỚI">
             <input class="mr20" type="reset" value="NHẬP LẠI">
 
-            <a href="?act=listdm"><input class="mr20" type="button" value="DANH SÁCH"></a>
+            <a href="javascript:void(0)" onclick="history.back()"><input class="mr20" type="button" value="Quay lại"></a>
           </div>
             <!-- <span class="js_er an">Thêm danh mục thành công</span> -->
             
@@ -42,34 +42,4 @@
         </form>
       </div>
     </div>
-    <script>
-      function check_add_dm(event){
-    var tenloai = document.querySelector('.jstenloai');
-  
-    var i=0;
-    if(tenloai.value.trim() ==""){
-        document.querySelector(".jsten_er").innerHTML ="Bạn chưa nhập tên";
-        event.preventDefault();
-        i++;
-        // return false;
-    }else{
-        document.querySelector(".jsten_er").innerHTML ="";
-    }
     
-    if((document.querySelector(".img").files.length) === 0){
-        document.querySelector(".js_img_er").innerHTML="Bạn chưa chọn ảnh";
-        event.preventDefault();
-        i++;
-    }else{
-        document.querySelector(".js_img_er").innerHTML="";
-    }
-    
-    // if(i==0){
-    //     document.querySelector(".js_er").classList.remove("an");
-    // }else{
-    //     document.querySelector(".js_er").classList.add("an");
-    // }
-}
-document.querySelector(".jsthem_dm").addEventListener("click",check_add_dm);
-
-    </script>

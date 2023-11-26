@@ -68,9 +68,16 @@ function insert_bienthe($size,$color,$id_sp){
     pdo_execute($sql);
 }
 
-
-// function insert_img($name, $id_sp){
-//     $sql= "INSERT INTO img_phu (name,id_sp) VALUES (?,?)";
-//     pdo_execute($sql,$name,$id_sp);
-// }
+function load_one_sp($id){
+    $sql = "SELECT * FROM sanpham WHERE id_sp = ?";
+    return pdo_query_one($sql,$id);
+}
+function load_img_phu($id){
+    $sql = "SELECT * FROM img_phu WHERE id_sp=?";
+    return pdo_query($sql,$id);
+}
+function load_bienthe($id){
+    $sql = "SELECT * FROM chitietsanpham WHERE id_sp = ?";
+    return pdo_query($sql,$id);
+}
 ?>

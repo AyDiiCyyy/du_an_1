@@ -119,7 +119,7 @@ switch ($act) {
 
             $id=insert_sanpham($_POST['tensp'], $_POST['giasp'], $name_img, $date, $_POST['iddm'], $_POST['mota']);
             insert_bienthe($size, $color,$id);
-            if(isset($_FILES['hinh_phu']['name'])&&$_FILES['hinh_phu']['name']!=""){
+            if(isset($_FILES['hinh_phu']['name'])&&$_FILES['hinh_phu']['name'][0]!=""){
                 $name_phu=$_FILES['hinh_phu']['name'];
                 insert_img($name_phu, $id);
                 foreach ($name_phu as $key=>$value) {
@@ -131,6 +131,12 @@ switch ($act) {
         $view = "sanpham/add.php";
         break;
     case "suasp":
+        if (isset($_GET['sua'])&&$_GET['sua']!=""){
+            $sanpham = load_one_sp($_GET['sua']);
+            $listdanhmuc=load_all_dm();
+            $load_img_phu=load_img_phu($_GET['sua']);
+
+        }
         $view = "sanpham/update.php";
         break;
     case "home":
