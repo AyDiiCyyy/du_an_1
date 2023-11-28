@@ -48,7 +48,7 @@ switch ($act) {
         if($_SERVER['REQUEST_METHOD']=="POST"){
             if(isset($_FILES['img'])&&$_FILES['img']['name']!=""){
                 $img=$_FILES['img']['name'];
-                move_uploaded_file($_FILES['tmp_name'],"../uploads/upload_dm/$img");
+                move_uploaded_file($_FILES['img']['tmp_name'],"../uploads/upload_dm/$img");
             }else{
                 $img=$_POST['img_ol'];
             }
@@ -135,7 +135,83 @@ switch ($act) {
             $sanpham = load_one_sp($_GET['sua']);
             $listdanhmuc=load_all_dm();
             $load_img_phu=load_img_phu($_GET['sua']);
+            $load_bien_the=load_bienthe($_GET['sua']);
+            $size_oll=array_column($load_bien_the,'size');
+            $size_oll=array_unique($size_oll);
+            $size_oll=implode(',', $size_oll);
+            $color_oll=array_column($load_bien_the,'color');
+            $color_oll=array_unique($color_oll);
+            $color_oll=implode(',', $color_oll);
+        }
+        if ($_SERVER['REQUEST_METHOD']=="POST"){
+            extract($_POST);
+            // update ảnh chính
+            if(isset($_FILES['hinh_chinh'])&&$_FILES['hinh_chinh']['name']!=""){
+                $img=$_FILES['hinh_chinh']['name'];
+                move_uploaded_file($_FILES['hinh_chinh']['tmp_name'],"../uploads/upload_sp/$img");
+            }else{
+                $img=$hinh_chinh_ol;
+            }
+            update_sp($iddm,$tensp,$giasp,$img,$mota,$id_sp);
+            // update ảnh phụ
+            if(isset($_FILES['hinh_phu'])){
+                $fileNames = $_FILES["hinh_phu"]["name"];
+                $flag = false;
+                foreach ($fileNames as $fileName) {
+                    if (!empty($fileName)) {
+                        $flag = true;
+                        break;
+                    }
+                }
+                if($flag){
+                    delete_img_ol($id_sp);
+                    foreach ($fileNames as $key=>$fileName) {
+                        move_uploaded_file($_FILES["hinh_phu"]['tmp_name'][$key],"../uploads/upload_sp/$fileName");
+                    }
+                    insert_img($fileNames,$id_sp);
+                    
+                }
+            }
 
+            // update biến thể
+            $bien_the=bienthe($id_sp);
+            // xử lý biến thể size
+            $size_new=$_POST['size'];
+            $size_new=str_replace(" " , "" ,"$size"); // giá trị muốn tìm " " thay bằng "" trong chuỗi
+            $size_new=explode(',', $size); // chuyển chuỗi thành mảng
+            // so sánh sự thay đổi 
+            $size_ol=array_column($bien_the,'size');
+            $color_ol=array_column($bien_the,'color');
+
+            $size_new_khac = array_diff($size_new, $size_ol);
+            $size_ol_khac = array_diff($size_ol, $size_new);
+            $size_chung = array_intersect($size_new, $size_ol);
+            // $size_new_ht = array_merge($size_new_khac, $size_chung);
+
+
+            // xử lý biến thể color
+            $color_new=$_POST['color'];
+            $color_new=str_replace(" " , "" ,"$color");
+            $color_new=explode(',', $color);
+
+            $color_new_khac = array_diff($color_new, $color_ol);
+            $color_ol_khac = array_diff($color_ol, $color_new);
+            $color_chung = array_intersect($color_new, $color_ol);
+            $color_new_ht = array_merge($color_new_khac, $color_chung);
+
+
+            // update vào database
+            // lược bỏ các giá trị giống nhau trong mảng
+            $size_ol_khac = array_unique($size_ol_khac);
+            $color_ol_khac = array_unique($color_ol_khac);
+            delete_bienthe($size_ol_khac,$color_ol_khac,$id_sp);
+            
+            insert_bienthe($size_new_khac,$color_new_ht,$id_sp);   // thêm size mới vs all màu 
+            insert_bienthe($size_chung,$color_new_khac,$id_sp);     // thêm size cũ vs all màu mới
+
+
+            echo '<script>alert("Sửa sản phẩm thành công")</script>';
+            echo '<script>window.location.href="?act=listsp"</script>';
         }
         $view = "sanpham/update.php";
         break;

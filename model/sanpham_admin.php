@@ -58,14 +58,41 @@ function insert_img($name, $id_sp){
 }
 
 function insert_bienthe($size,$color,$id_sp){
-    $sql="INSERT INTO chitietsanpham (size,color,id_sp) VALUES ";
-    foreach ($size as $sz) {
-        foreach ($color as $mau){
-            $sql .= "('$sz','$mau', $id_sp), ";
+    if(!empty(array_filter($size)) && !empty(array_filter($color))){
+        $sql="INSERT INTO chitietsanpham (size,color,id_sp) VALUES ";
+        // echo "<pre>";
+        //         print_r($size);
+        //         print_r($color);
+        //         die();
+        foreach ($size as $sz) {
+            foreach ($color as $mau){
+                $sql .= "('$sz','$mau', $id_sp), ";
+            }
         }
+        $sql=rtrim($sql,", ");
+        pdo_execute($sql);
     }
-    $sql=rtrim($sql,", ");
-    pdo_execute($sql);
+}
+
+function delete_bienthe($size,$color,$id_sp){
+    
+    $size = !empty($size) ? '"' . implode('","', $size) . '"' : '';
+    $color = !empty($color) ? '"' . implode('","', $color) . '"' : '';
+    if($size!=""||$color!=""){
+        $sql = "DELETE FROM chitietsanpham WHERE id_sp = $id_sp ";
+    }
+    if ($size!=""){
+        $sql.= "AND size IN ($size) ";
+    }
+    if ($color!=""){
+        $sql.= "AND color IN ($color) ";
+    }
+    
+    // die($sql);
+    if(isset($sql)){
+        pdo_execute($sql);
+    }
+
 }
 
 function load_one_sp($id){
@@ -78,6 +105,21 @@ function load_img_phu($id){
 }
 function load_bienthe($id){
     $sql = "SELECT * FROM chitietsanpham WHERE id_sp = ?";
+    return pdo_query($sql,$id);
+}
+
+function update_sp($id_danhmuc,$name,$price,$img_chinh,$mota,$id){
+    $sql = "UPDATE sanpham SET id_danhmuc = ?, name = ?, price = ?, img=?, mota=? WHERE id_sp=?";
+    pdo_execute($sql,$id_danhmuc,$name,$price,$img_chinh,$mota,$id);
+}
+
+function delete_img_ol($id){
+    $sql ="DELETE FROM img_phu WHERE id_sp=?";
+    pdo_execute($sql,$id);
+}
+
+function bienthe($id){
+    $sql= "SELECT * FROM chitietsanpham WHERE id_sp = ?";
     return pdo_query($sql,$id);
 }
 ?>
