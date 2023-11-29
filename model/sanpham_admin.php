@@ -122,4 +122,20 @@ function bienthe($id){
     $sql= "SELECT * FROM chitietsanpham WHERE id_sp = ?";
     return pdo_query($sql,$id);
 }
+
+function update_bt($sl,$id){
+    $sql ="UPDATE chitietsanpham
+    SET so_luong = CASE ";
+
+    foreach ($sl as $key => $soluong) {
+        $id_ctsp=$id[$key];
+        if(empty($soluong)){
+            $soluong=0;
+        }
+        $sql .= "WHEN id_ctsp = $id_ctsp THEN $soluong ";
+    }
+    $sql .= "ELSE so_luong
+    END";
+    pdo_execute($sql);
+}
 ?>

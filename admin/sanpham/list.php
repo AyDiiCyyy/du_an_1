@@ -46,6 +46,7 @@
                             <td>
                                 <a href="?act=suasp&sua=<?= $sanpham['id_sp'] ?>"><input type="button" value="Sửa"></a>
                                 <a href="?act=listsp&xoa=<?= $sanpham['id_sp'] ?>"><input type="button" value="Xoá"></a>
+                                <a href="?act=qlbt&ud=<?= $sanpham['id_sp'] ?>"><input type="button" value="Quản lý biến thể"></a>
                             </td>
                         </tr>
                     <?php endforeach ?>

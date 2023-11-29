@@ -103,7 +103,7 @@ if(jsthem_dm){
 }
 var jsthem_sp=document.querySelector(".jsthem_sp");
 if(jsthem_sp){
-//   jsthem_sp.addEventListener("click",check_add_sp);
+  jsthem_sp.addEventListener("click",check_add_sp);
 }
 
 console.log()

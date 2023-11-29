@@ -215,6 +215,17 @@ switch ($act) {
         }
         $view = "sanpham/update.php";
         break;
+    case "qlbt":
+        if(isset($_GET['ud'])&& $_GET['ud']!=""){
+            $bienthes=load_bienthe($_GET['ud']);
+        }
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            update_bt($_POST['slbt'],$_POST['id_ctsp']);
+            echo '<script>alert("Sửa biến thể thành công")</script>';
+            echo '<script>window.location.href="?act=qlbt&ud='.$_POST['id_sp'].'"</script>';
+        }
+        $view = "sanpham/qlbt.php";
+        break;
     case "home":
         $view = "home.php";
     break;

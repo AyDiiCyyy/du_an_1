@@ -83,7 +83,7 @@
 
 
       <div class="row mb10 ">
-        <input class="mr20 jsthem_sp" id="jsthem_sp" type="submit" name="themmoi" value="CẬP NHẬT">
+        <input class="mr20" id="jsthem_sp" type="submit" name="themmoi" value="CẬP NHẬT">
         <input class="mr20" type="reset" value="NHẬP LẠI">
         
         <a href="javascript:void(0)" onclick="history.back()"><input class="mr20" type="button" value="Quay lại"></a>
