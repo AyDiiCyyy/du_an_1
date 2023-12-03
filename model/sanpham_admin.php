@@ -85,10 +85,9 @@ function delete_bienthe($size,$color,$id_sp){
         $sql.= "AND size IN ($size) ";
     }
     if ($color!=""){
-        $sql.= "AND color IN ($color) ";
+        $sql.= "OR color IN ($color) ";
     }
     
-    // die($sql);
     if(isset($sql)){
         pdo_execute($sql);
     }

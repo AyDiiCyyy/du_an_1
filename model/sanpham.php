@@ -47,5 +47,28 @@ function load_sp_home($id_danhhmuc = null,$end, $start){
         return pdo_query($sql);
     }
 }
+function load_one_sp($id){
+    $sql = "SELECT sanpham.*, danhmuc.name AS name_dm, danhmuc.id_danhmuc FROM sanpham 
+    INNER JOIN danhmuc ON danhmuc.id_danhmuc = sanpham.id_danhmuc
+    WHERE id_sp = ?";
+    return pdo_query_one($sql,$id);
+}
+function load_all_img($id){
+    $sql = "SELECT name FROM img_phu WHERE id_sp = ?";
+    return pdo_query($sql,$id);
+}
+
+function load_bienthe($id){
+    $sql = "SELECT * FROM chitietsanpham WHERE id_sp = ? AND so_luong>0 ORDER BY size";
+    return pdo_query($sql,$id);
+}
+
+function load_sp_cart ($id){
+    $sql = "SELECT chitietsanpham.size, chitietsanpham.id_ctsp, chitietsanpham.color, sanpham.* FROM chitietsanpham 
+    INNER JOIN sanpham ON sanpham.id_sp = chitietsanpham.id_sp
+    WHERE id_ctsp IN ($id)";
+    // die($sql);
+    return pdo_query($sql);
+}
 
 ?>

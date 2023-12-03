@@ -1,4 +1,5 @@
 <!-- breadcrumb -->
+
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
         <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
@@ -6,13 +7,13 @@
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Nam
+        <a href="?act=dmsp&id_danhmuc=<?= $ctsp['id_danhmuc'] ?>" class="stext-109 cl8 hov-cl1 trans-04">
+            <?= $ctsp['name_dm'] ?>
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
         <span class="stext-109 cl4">
-            Áo Khoác Bomber
+            <?= $ctsp['name'] ?>
         </span>
     </div>
 </div>
@@ -29,35 +30,28 @@
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                            <div class="item-slick3" data-thumb="./uploads/upload_sp/<?= $ctsp['img'] ?>">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                    <img src="./uploads/upload_sp/<?= $ctsp['img'] ?>" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./uploads/upload_sp/<?= $ctsp['img'] ?>">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
+        
+                            <?php foreach ($img as $value) : ?>
+                    
+                                <div class="item-slick3" data-thumb="./uploads/upload_sp/<?= $value['name'] ?>">
+                                    <div class="wrap-pic-w pos-relative">
+                                        <img src="./uploads/upload_sp/<?= $value['name'] ?>" alt="IMG-PRODUCT">
 
-                            <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="./uploads/upload_sp/<?= $value['name'] ?>">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
+                            <?php endforeach ?>
                         </div>
                     </div>
                 </div>
@@ -66,19 +60,15 @@
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                        Áo Khoác Bomber
+                        <?= $ctsp['name'] ?>
                     </h4>
 
                     <span class="mtext-106 cl2">
-                        $58.79
+                        <?= $ctsp['price'] ?> Đ
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
-                        Áo Khoác Bomber với thiết kế trẻ trung, lịch lãm mang đến cho các quý ông sự sang trọng
-                        nhưng
-                        cũng không kém phần tinh tế, tính năng giữ ấm cơ thể và cản gió ưu việt.
-                        Có thể phối cùng Jeans, Khaki, quần âu đều đẹp. Mặc trong môi trường công sở, dạo phố,
-                        du lịch hay đến các buổi tiệc đều mang đến sự tự tin đẳng cấp dành cho khách hàng.
+                        <?= $ctsp['mota'] ?>
 
                     </p>
 
@@ -86,24 +76,27 @@
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
-                                Kích Thước
+                                Phân Loại
                             </div>
 
                             <div class="size-204 respon6-next">
+                            <span id="bien_the_er" style="color: red;"></span>
                                 <div class="rs1-select2 bor8 bg0">
-                                    <select class="js-select2" name="time">
-                                        <option>Choose an option</option>
-                                        <option>Size S</option>
-                                        <option>Size M</option>
+                                    <select id="bienthe" class="js-select2" name="time">
+                                        <option value="">Chọn Size Và Màu</option>
+                                        <?php foreach($bienthe as $bt) : ?>
+                                        <option value="<?=$bt['id_ctsp']?>"><?=$bt['size']?> (<?=$bt['color']?>)</option>
+                                        <?php endforeach ?>
+                                        <!-- <option>Size M</option>
                                         <option>Size L</option>
-                                        <option>Size XL</option>
+                                        <option>Size XL</option> -->
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex-w flex-r-m p-b-10">
+                        <!-- <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Màu Sắc
                             </div>
@@ -120,7 +113,7 @@
                                     <div class="dropDownSelect2"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
@@ -135,8 +128,8 @@
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
                                 </div>
-
-                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                        
+                                <button data-id="<?=$ctsp['id_sp']?>" type="button" onclick="addToCart(<?=$ctsp['id_sp']?>,'<?=$ctsp['name']?>',<?=$ctsp['price']?>, id_bienthe.value)" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                     Thêm Vào Giỏ Hàng
                                 </button>
                             </div>
@@ -191,36 +184,7 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                Chất Liệu: Nỉ
-                                Màu Sắc: ĐEN, TRẮNG, XÁM ,XANH, ĐỎ
-                                Đặc Tính: Chất vải áo là chất nỉ mặc thoáng mát thấm hút mồ hôi
-                                Bảng size bên shop các bạn tham khảo ạ:
-                                Bảng SIZE:
-                                -Size S:38 - 45kg Cao dưới 1M50
-                                -Size M: 45 - 52kg Cao dưới 1m6
-                                -Size L: 52 - 58kg, Cao 1m65
-                                -Size XL: 58 - 65kg , Cao 1m65- 1m7
-                                Bảng size chỉ mang tính chất tham khảo vì còn tùy thuộc vào cơ địa của mỗi bạn ạ
-                                👉 Bảng size mang tính chất tham khảo bạn có thể lấy size to hơn hoặc nhỏ theo yêu cầu
-                                của bạn!
-                                II.SHOP CAM KẾT
-                                - Sản phẩm bộ nỉ xịn đét, form rộng giống mô tả 100%
-                                - Hình ảnh sản phẩm là ảnh thật, các hình hoàn toàn do shop tự thiết kế và chụp.
-                                - Kiểm tra cẩn thận trước khi gói hàng giao cho Quý Khách
-                                - Hàng có sẵn, giao hàng ngay khi nhận được đơn
-                                - Hoàn tiền nếu sản phẩm không giống với mô tả
-                                - Chấp nhận đổi hàng khi size không vừa trong 3 ngày.
-                                III. HỖ TRỢ BẢO HÀNH ĐỔI TRẢ THEO QUY ĐỊNH CỦA SHOPEE
-                                - Điều kiện áp dụng (trong vòng 3 ngày kể từ khi nhận sản phẩm)
-                                - Hàng hoá bị rách, in lỗi, bung chỉ, và các lỗi do vận chuyển hoặc do nhà sản xuất.
-                                1. Trường hợp được chấp nhận:
-                                - Hàng giao sai size khách đã đặt hàng
-                                - Giao thiếu hàng
-                                2. Trường hợp không đủ điều kiện áp dụng chính sách:
-                                - Quá 2 ngày kể từ khi Quý khách nhận hàng
-                                - Gửi lại hàng không đúng mẫu mã, không phải sản phẩm của shop
-                                - Không thích, không hợp, đặt nhầm mã, nhầm màu,...
-                                i.⚠️ LƯU Ý: Khi mở sản phẩm, khách yêu vui lòng quay lại video quá trình mở sản phẩm Ạ
+                                <?= $ctsp['mota'] ?>
                             </p>
                         </div>
                     </div>
@@ -312,15 +276,15 @@
                                                 <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                     <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
                                                 </div>
-    
+
                                                 <div class="size-207">
                                                     <div class="flex-w flex-sb-m p-b-17">
                                                         <span class="mtext-107 cl2 p-r-20">
                                                             Nguyễn Ngọc Quốc
                                                         </span>
-    
+
                                                     </div>
-    
+
                                                     <p class="stext-102 coi cl6">
                                                         Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
                                                         cơ hội nhất định sẽ ủng hộ tiếp
@@ -332,33 +296,34 @@
                                                 <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                     <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
                                                 </div>
-    
+
                                                 <div class="size-207">
                                                     <div class="flex-w flex-sb-m p-b-17">
                                                         <span class="mtext-107 cl2 p-r-20">
                                                             Nguyễn Ngọc Quốc
                                                         </span>
-    
+
                                                     </div>
-    
+
                                                     <p class="stext-102 coi cl6">
                                                         Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
                                                         cơ hội nhất định sẽ ủng hộ tiếp
                                                     </p>
                                                 </div>
-                                            </div><div class="datcoi">
+                                            </div>
+                                            <div class="datcoi">
                                                 <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
                                                     <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
                                                 </div>
-    
+
                                                 <div class="size-207">
                                                     <div class="flex-w flex-sb-m p-b-17">
                                                         <span class="mtext-107 cl2 p-r-20">
                                                             Nguyễn Ngọc Quốc
                                                         </span>
-    
+
                                                     </div>
-    
+
                                                     <p class="stext-102 coi cl6">
                                                         Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
                                                         cơ hội nhất định sẽ ủng hộ tiếp
@@ -366,7 +331,7 @@
                                                 </div>
                                             </div>
 
-                                           
+
                                         </div>
                                         <!-- Review -->
                                 </div>
@@ -825,3 +790,34 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    let totalProduct = document.getElementById('totalProduct');
+    var id_bienthe = document.getElementById('bienthe');
+    function addToCart(productId, productName, productPrice, id_bienthe){
+        if(id_bienthe==""){
+            document.getElementById("bien_the_er").innerText = "Bạn chưa chọn loại hàng";
+        }else{
+            document.getElementById("bien_the_er").innerText = "";
+            // Sử dụng JQuery
+            $.ajax ({
+                type: "POST",
+                // Đường dẫn đến file php xử lý dữ liệu
+                url: "./view/addToCart.php",
+                data: {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    id_bt: id_bienthe,
+                },
+                success: function (response){
+                    totalProduct.dataset.notify = response;
+                    alert ("Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
+                },
+                error: function(error){
+                    console.log(error);
+                },
+            });
+        }
+    }
+</script>

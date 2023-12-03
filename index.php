@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // product là danh mục sản phẩm
     // product-detail là sản phẩm chi tiết
     include_once "model/danhmuc.php";
@@ -21,7 +22,29 @@
             case "":
                 $view = "view/main.php";
                 break;
+            case "listcart":
+                // kiểm tra xem giỏ hàng có dữ liệu hay không
+                if(!empty($_SESSION['cart'])){
+                    $cart = $_SESSION['cart'];
+                    
+
+                    // tạo mảng chưa id các sản phẩm trong giỏ hàng
+                    $productId = array_column($cart, 'id_bt');
+
+                    // chuyển mảng id thành 1 chuỗi
+                    $idList = implode(',', $productId); 
+
+                    // lấy sản phẩm trong bảng sản phẩm theo id
+                    $dataDb = load_sp_cart ($idList);
+                }
+                $view = "view/giohang.php";
+                break;
             case 'sanphamct':
+                if(isset($_GET['id_sp'])&& $_GET['id_sp']!=""){
+                    $ctsp = load_one_sp($_GET['id_sp']);
+                    $img=load_all_img($_GET['id_sp']);
+                    $bienthe=load_bienthe($_GET['id_sp']);
+                }
                 $view = "view/chitietsanpham.php";
                 break;
             case "dmsp":

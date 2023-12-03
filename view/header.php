@@ -114,8 +114,8 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="2">
+                        <div id="totalProduct" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                            data-notify="<?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0?>">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
@@ -307,7 +307,7 @@
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href="shoping-cart.html"
+                        <a href="?act=listcart"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                             Giỏ Hàng
                         </a>
