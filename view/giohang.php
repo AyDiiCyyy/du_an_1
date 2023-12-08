@@ -122,22 +122,34 @@ if (empty($dataDb)) {
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div> -->
-
+                                    <span class="text-danger " id="name_er"></span>
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Họ và tên">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Họ và tên" id="ten" value="<?= (isset($tt_tk['ho_ten']) ? $tt_tk['ho_ten'] : "") ?>">
                                     </div>
+                                    <span class="text-danger " id="sdt_er"></span>
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="sdt" placeholder="Số điện thoại">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="sdt" placeholder="Số điện thoại" id="sdt" value="<?= (isset($tt_tk['sdt']) ? $tt_tk['sdt'] : "") ?>">
+
+                                    </div>
+                                    <span class="text-danger " id="dia_chi_er"></span>
+                                    <div class="bor8 bg0 m-b-12">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="dia_chỉ" placeholder="Địa chỉ nhận hàng" id="dia_chi" value="<?= (isset($tt_tk['address']) ? $tt_tk['address'] : "") ?>">
+
+                                    </div>
+                                    <div class=" bg0 m-b-12">
+                                        Phương thức thanh toán <br>
+                                        <input type="radio" name="thanh_toan" value="1" style="display: inline;" checked> thanh toán khi nhận
+
+                                    </div>
+                                    <div class=" bg0 m-b-22">
+                                        <input type="radio" name="thanh_toan" value="2" style="display: inline;" disabled> thanh toán VNpay
 
                                     </div>
 
-                                    <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="dia_chỉ" placeholder="Địa chỉ nhận hàng">
 
-                                    </div>
 
                                     <div class="flex-w" style="justify-content: center;">
-                                        <input type="button" class="btn btn-success" value="Lưu">
+                                        <input type="button" class="btn btn-success" value="Lưu" <?= (isset($_COOKIE['user']) ? '' : 'disabled') ?> onclick="update_user(ten.value,sdt.value,dia_chi.value,<?= (isset($_COOKIE['user']) ?? '') ?>)">
 
                                     </div>
 
@@ -162,7 +174,7 @@ if (empty($dataDb)) {
                         <!-- <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Đặt hàng
                         </button> -->
-                        <input type="button" class="btn btn-success flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" value="Đặt hàng">
+                        <input type="button" class="btn btn-success flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" value="Đặt hàng" onclick="dat_hang(ten.value,sdt.value,dia_chi.value,pttt)">
                     </div>
                 </div>
             </div>
@@ -172,6 +184,13 @@ if (empty($dataDb)) {
 
 <script>
     let totalProduct = document.getElementById('totalProduct');
+    let ten = document.getElementById('ten');
+    let sdt = document.getElementById('sdt');
+    let dia_chi = document.getElementById('dia_chi');
+    let name_er = document.getElementById('name_er');
+    let sdt_er = document.getElementById('sdt_er');
+    let dia_chi_er = document.getElementById('dia_chi_er');
+    let pttt = document.getElementsByName('thanh_toan');
     //     /*==================================================================
     // [ +/- num product ]*/
     // $('.btn-num-product-down').on('click', function(){
@@ -189,7 +208,8 @@ if (empty($dataDb)) {
         let price_sp = document.getElementById('price_sp_' + id);
         let tong_tien = document.getElementsByClassName('tong_tien_one');
         let tong_all = document.getElementById('tong_all');
-        let tinh=0;
+        let tinh = 0;
+
         if (newQuantity.value > 1) {
             newQuantity.value -= 1;
         }
@@ -198,7 +218,7 @@ if (empty($dataDb)) {
         for (let i = 0; i < tong_tien.length; i++) {
             tinh += parseInt(tong_tien[i].innerText.replace(/\./g, ''), 10);
         }
-        tong_all.innerText = formatNumberWithDot(tinh)+' Đ';
+        tong_all.innerText = formatNumberWithDot(tinh) + ' Đ';
         updateQuantity(id);
     }
 
@@ -208,14 +228,14 @@ if (empty($dataDb)) {
         let price_sp = document.getElementById('price_sp_' + id);
         let tong_tien = document.getElementsByClassName('tong_tien_one');
         let tong_all = document.getElementById('tong_all');
-        let tinh=0;
+        let tinh = 0;
         newQuantity.value = parseInt(newQuantity.value, 10) + 1;
         tong_tien_one.innerText = (newQuantity.value * parseInt(price_sp.innerText.replace(/\./g, ''), 10)) + ' Đ';
         tong_tien_one.innerText = formatNumberWithDot(tong_tien_one.innerText);
         for (let i = 0; i < tong_tien.length; i++) {
             tinh += parseInt(tong_tien[i].innerText.replace(/\./g, ''), 10);
         }
-        tong_all.innerText = formatNumberWithDot(tinh)+' Đ';
+        tong_all.innerText = formatNumberWithDot(tinh) + ' Đ';
         updateQuantity(id);
 
     }
@@ -248,11 +268,11 @@ if (empty($dataDb)) {
     }
 
     // gửi yêu cầu ajax xoá giỏ hàng
-    function delete_gh(id){
-        let delete_gh = document.getElementById('row_'+id);
-        
-        
-        $.ajax ({
+    function delete_gh(id) {
+        let delete_gh = document.getElementById('row_' + id);
+
+
+        $.ajax({
             type: 'POST',
             url: "./view/delete_gh.php",
             data: {
@@ -269,13 +289,97 @@ if (empty($dataDb)) {
             }
         })
     }
-    function update_price_xoa(){
+
+    function update_price_xoa() {
         let tong_tien = document.getElementsByClassName('tong_tien_one');
         let tong_all = document.getElementById('tong_all');
-        let tinh=0;
+        let tinh = 0;
         for (let i = 0; i < tong_tien.length; i++) {
             tinh += parseInt(tong_tien[i].innerText.replace(/\./g, ''), 10);
         }
-        tong_all.innerText = formatNumberWithDot(tinh)+' Đ';
+        tong_all.innerText = formatNumberWithDot(tinh) + ' Đ';
+    }
+
+    function update_user(ten, sdt, dia_chi, id_tk) {
+        $.ajax({
+            type: 'POST',
+            url: './view/ajax.php',
+            data: {
+                ho_ten: ten,
+                sdt: sdt,
+                address: dia_chi,
+                id_tk: id_tk,
+                act: 'update_ttgh'
+            },
+            success: function(response) {
+                alert('Cập nhật thành công');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
+    function dat_hang(ten, sdt, dia_chi) {
+        if (<?= isset($_COOKIE['user']) ? 1 : 0 ?>) {
+            // trường hợp đã đăng nhập
+
+            let count = 0;
+            if (ten == "") {
+
+                name_er.innerText = "Bạn không được để trống tên";
+            } else {
+                name_er.innerText = "";
+                count++;
+            }
+            if (sdt == "") {
+
+                sdt_er.innerText = "Bạn không được để trống số điện thoại";
+            } else {
+                sdt_er.innerText = "";
+                count++;
+            }
+            if (dia_chi == "") {
+
+                dia_chi_er.innerText = "Bạn không được để trống địa chỉ";
+            } else {
+                dia_chi_er.innerText = "";
+                count++;
+            }
+
+            for (var i = 0; i < pttt.length; i++) {
+                if (pttt[i].checked) {
+                    // Nếu được chọn, lấy giá trị của radio button và hiển thị nó
+                    pttt = pttt[i].value;
+                    break; // Dừng vòng lặp nếu đã tìm thấy radio button được chọn
+                }
+            }
+
+            if (count >= 3) {
+                $.ajax({
+                    type: 'POST',
+                    url: './view/ajax.php',
+                    data: {
+                        ten_hd: ten,
+                        sdt_hd: sdt,
+                        dia_chi_hd: dia_chi,
+                        pttt: pttt,
+                        user: <?=(isset($_COOKIE['user'])?$_COOKIE['user']:'0')?>,
+                        act: 'mua_hang'
+
+                    },
+                    success: function(response) {
+                        alert("mua hàng thành công");
+                        window.location.href = "?act=don_hang";
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            }
+
+        } else {
+            window.location.href = "?act=login";
+        }
     }
 </script>

@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!--===============================================================================================-->
 </head>
 
@@ -55,10 +56,21 @@
                         <a href="#" class="flex-c-m trans-04 p-lr-25">
                             Trợ giúp & Câu hỏi thường gặp
                         </a>
+                        <?php
 
-                        <a href="./login/dn.php" class="flex-c-m trans-04 p-lr-25">
+                        if (isset($_COOKIE['user'])) { ?>
+
+                            <a href="javascript:void(0);" class="flex-c-m trans-04 p-lr-25" onclick="dang_xuat()">
+                                Đăng Xuất
+                            </a>
+                        <?php }else{ ?>
+                            <a href="?act=login" class="flex-c-m trans-04 p-lr-25">
+                                Đăng nhập
+                            </a>
+                        <?php }  ?>
+                        <!-- <a href="./login/dn.php" class="flex-c-m trans-04 p-lr-25">
                             Tài Khoản Của Tôi
-                        </a>
+                        </a> -->
 
                         <a href="#" class="flex-c-m trans-04 p-lr-25">
                             VN
@@ -91,7 +103,10 @@
                             </li>
 
                             <li>
-                                <a href="giohang.php">Giỏ Hàng</a>
+                                <a href="?act=listcart">Giỏ Hàng</a>
+                            </li>
+                            <li>
+                                <a href="?act=don_hang">Đơn hàng</a>
                             </li>
 
                             <li>
@@ -102,9 +117,7 @@
                                 <a href="gioithieu.php">Giới Thiệu</a>
                             </li>
 
-                            <li>
-                                <a href="lienhe.php">Liên Hệ</a>
-                            </li>
+                            
                         </ul>
                     </div>
 
@@ -113,14 +126,13 @@
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                             <i class="zmdi zmdi-search"></i>
                         </div>
+                        <a href="?act=listcart">
+                            <div id="totalProduct" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti " data-notify="<?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                        </a>
 
-                        <div id="totalProduct" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="<?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0?>">
-                            <i class="zmdi zmdi-shopping-cart"></i>
-                        </div>
-
-                        <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                            data-notify="0">
+                        <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                     </div>
@@ -141,13 +153,11 @@
                     <i class="zmdi zmdi-search"></i>
                 </div>
 
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                    data-notify="2">
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
-                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-                    data-notify="0">
+                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
                 </a>
             </div>
@@ -307,13 +317,11 @@
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href="?act=listcart"
-                            class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        <a href="?act=listcart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                             Giỏ Hàng
                         </a>
 
-                        <a href="shoping-cart.html"
-                            class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Thanh Toán
                         </a>
                     </div>
@@ -322,3 +330,25 @@
         </div>
     </div>
     <!-- #region -->
+    <script>
+        
+      function dang_xuat(){
+        $.ajax ({
+            type: "POST",
+            url: './view/ajax.php',
+            data: {
+                dang_xuat: true,
+                act: 'dang_xuat'
+            },
+            success: function(response){
+            alert ('Đăng xuất thành công');
+            location.reload();
+        },
+            error: function(error){
+                console.log(error);
+            }
+        })
+        
+      }
+
+    </script>

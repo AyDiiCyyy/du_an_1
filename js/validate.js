@@ -1,3 +1,24 @@
+// đăng ký
+
+// var signup = document.getElementById('dang_ky');
+// if (signup){
+//     signup.addEventListener('click', )
+// }
+
+
+// // hàm check đăng ký
+// function check_dk(){
+
+// }
+
+
+function validatemail(email) {
+    // Biểu thức chính quy để kiểm tra định dạng email
+    const emailRegex =/^\S+@\S+\.\S+$/;
+    
+    // Kiểm tra xem địa chỉ email có phù hợp với biểu thức chính quy không
+    return emailRegex.test(email);
+}
 
 function check_add_dm(event){
     var tenloai = document.querySelector('.jstenloai');
@@ -106,7 +127,7 @@ if(jsthem_sp){
   jsthem_sp.addEventListener("click",check_add_sp);
 }
 
-console.log()
+
 
 
 

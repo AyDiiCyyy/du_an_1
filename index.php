@@ -4,6 +4,8 @@
     // product-detail là sản phẩm chi tiết
     include_once "model/danhmuc.php";
     include_once "model/sanpham.php";
+    include_once "model/taikhoan.php";
+    
 
     if(!isset($_GET['xemthem'])){
         $end=4;
@@ -37,7 +39,17 @@
                     // lấy sản phẩm trong bảng sản phẩm theo id
                     $dataDb = load_sp_cart ($idList);
                 }
+                if(isset($_COOKIE['user'])){
+                    $tt_tk=load_tt($_COOKIE['user']);
+                }
+                
                 $view = "view/giohang.php";
+                break;
+            case "don_hang":
+                if(isset($_COOKIE['user'])){
+                    $sp_hd = load_hoadon($_COOKIE['user'],(isset($_GET['trang_thai'])?$_GET['trang_thai']:""));
+                }
+                $view = "view/donhang.php";
                 break;
             case 'sanphamct':
                 if(isset($_GET['id_sp'])&& $_GET['id_sp']!=""){
@@ -50,8 +62,15 @@
             case "dmsp":
                 $view = "view/danhmucsp.php";
                 break;
-
+            case "signup":
+                
+                $view = "view/signup.php";
+                break;
+            case "login":
+                $view = "view/login.php";
+                break;
             case "home":
+                
                 // $load_16sp = load_sp_home($_GET['id_danhmuc']);
                 $view = "view/main.php";
             break;
