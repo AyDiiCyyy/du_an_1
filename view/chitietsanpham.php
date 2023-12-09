@@ -165,90 +165,25 @@
             <div class="tab01">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item p-b-10">
+                    <!-- <li class="nav-item p-b-10">
                         <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Nội Dung</a>
                     </li>
 
                     <li class="nav-item p-b-10">
                         <a class="nav-link" data-toggle="tab" href="#information" role="tab">Thông Tin Sản Phẩm</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item p-b-10">
-                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình Luận</a>
+                        <a class="nav-link active" aria-expanded="true" data-toggle="tab" href="#reviews" role="tab">Bình Luận</a>
                     </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content p-t-43">
                     <!-- - -->
-                    <div class="tab-pane fade show active" id="description" role="tabpanel">
-                        <div class="how-pos2 p-lr-15-md">
-                            <p class="stext-102 cl6">
-                                <?= $ctsp['mota'] ?>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- - -->
-                    <div class="tab-pane fade" id="information" role="tabpanel">
-                        <div class="row">
-                            <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-                                <ul class="p-lr-28 p-lr-15-sm">
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Cân Nặng
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            38kg-65kg
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Chiều Cao
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            Dưới 1m50 - 1m70
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Chất Liệu
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            Nỉ
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Màu Sắc
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            Đen, Trắng, Xám, Xanh, Đỏ
-                                        </span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-                                        <span class="stext-102 cl3 size-205">
-                                            Kích Cỡ
-                                        </span>
-
-                                        <span class="stext-102 cl6 size-206">
-                                            S, M, L, XL
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- Bình Luận -->
-                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="tab-pane fade"  id="reviews" role="tabpanel">
                         <div class="row">
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
@@ -267,69 +202,41 @@
                                                 <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
                                             </div>
                                         </div>
-                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" style="margin-bottom: 40px;">
+                                        <?php
+                                            if(isset($_COOKIE['user'])){
+                                                $user = $_COOKIE['user'];
+                                            }else{
+                                                $user = 0;
+                                            }
+                                        ?>
+                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" type="button" onclick="binh_luan(<?=$ctsp['id_sp']?>,<?=$user?>,noidung.value)" style="margin-bottom: 40px;">
                                             Gửi
                                         </button>
                                         <!-- Review -->
-                                        <div class="bl flex-w flex-t">
-                                            <div class="datcoi">
+                                        <div class="bl flex-w flex-t" id="bo_binh_luan" style="min-height: 185px;">
+                                            <?php foreach($bl as $value) : ?>
+                                            <div class="datcoi" style="width: 100%;">
                                                 <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                    <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
+                                                    <img src="https://down-vn.img.susercontent.com/file/e5ea18765d0a4bab7a5bc628e844e588_tn" alt="AVATAR">
                                                 </div>
 
                                                 <div class="size-207">
                                                     <div class="flex-w flex-sb-m p-b-17">
                                                         <span class="mtext-107 cl2 p-r-20">
-                                                            Nguyễn Ngọc Quốc
+                                                            <?=$value['ho_ten']?>
                                                         </span>
 
                                                     </div>
 
                                                     <p class="stext-102 coi cl6">
-                                                        Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
-                                                        cơ hội nhất định sẽ ủng hộ tiếp
+                                                    <?=$value['noi_dung']?>
                                                     </p>
+                                                    <br>
                                                 </div>
                                             </div>
+                                            <?php endforeach ?>
 
-                                            <div class="datcoi">
-                                                <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                    <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
-                                                </div>
-
-                                                <div class="size-207">
-                                                    <div class="flex-w flex-sb-m p-b-17">
-                                                        <span class="mtext-107 cl2 p-r-20">
-                                                            Nguyễn Ngọc Quốc
-                                                        </span>
-
-                                                    </div>
-
-                                                    <p class="stext-102 coi cl6">
-                                                        Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
-                                                        cơ hội nhất định sẽ ủng hộ tiếp
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="datcoi">
-                                                <div class=" wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                    <img src="https://avatars.githubusercontent.com/u/119502535?v=4" alt="AVATAR">
-                                                </div>
-
-                                                <div class="size-207">
-                                                    <div class="flex-w flex-sb-m p-b-17">
-                                                        <span class="mtext-107 cl2 p-r-20">
-                                                            Nguyễn Ngọc Quốc
-                                                        </span>
-
-                                                    </div>
-
-                                                    <p class="stext-102 coi cl6">
-                                                        Sản phẩm rất tuyệt vời, không có gì để chê rất hợp với túi tiền, có
-                                                        cơ hội nhất định sẽ ủng hộ tiếp
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            
 
 
                                         </div>
@@ -819,5 +726,30 @@
                 },
             });
         }
+    }
+
+    let noidung = document.getElementById('review');
+
+    function binh_luan(id_sp,id_user,nd){
+        let bo_binh_luan = document.getElementById('bo_binh_luan');
+        
+        $.ajax ({
+                type: "POST",
+                // Đường dẫn đến file php xử lý dữ liệu
+                url: "./view/ajax.php",
+                data: {
+                    id_sp: id_sp,
+                    id_user: id_user,
+                    nd: nd,
+                    act: "binh_luan"
+                },
+                success: function (response){
+                    bo_binh_luan.insertAdjacentHTML('afterbegin', response);
+                    // alert ("Thêm bình luận thành công");
+                },
+                error: function(error){
+                    console.log(error);
+                },
+            });
     }
 </script>

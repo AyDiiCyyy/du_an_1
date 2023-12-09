@@ -64,4 +64,18 @@ function delete_hd($id){
     pdo_execute($sql);
 }
 
+function binh_luan($id_sp,$id_user,$nd){
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $date = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO binhluan(id_sp, id_user, noi_dung, ngay_binh_luan) VALUES ('$id_sp','$id_user','$nd','$date')";
+    return pdo_execute($sql);
+
+}
+
+function load_one_bl ($id_bl){
+    $sql = "SELECT binhluan.noi_dung, user.ho_ten FROM binhluan 
+    INNER JOIN user ON binhluan.id_user = user.id_user
+    WHERE binhluan.id_bl = $id_bl";
+    return pdo_query_one($sql);
+}
 ?>

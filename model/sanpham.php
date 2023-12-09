@@ -71,4 +71,12 @@ function load_sp_cart ($id){
     return pdo_query($sql);
 }
 
+function load_bl($id_sp){
+    $sql = "SELECT binhluan.noi_dung, user.ho_ten FROM binhluan 
+    INNER JOIN user ON binhluan.id_user = user.id_user
+    WHERE binhluan.id_sp = $id_sp ORDER BY binhluan.id_bl DESC LIMIT 0,3";
+    return pdo_query($sql);
+}
+
+
 ?>

@@ -56,6 +56,7 @@
                     $ctsp = load_one_sp($_GET['id_sp']);
                     $img=load_all_img($_GET['id_sp']);
                     $bienthe=load_bienthe($_GET['id_sp']);
+                    $bl= load_bl($_GET['id_sp']);
                 }
                 $view = "view/chitietsanpham.php";
                 break;

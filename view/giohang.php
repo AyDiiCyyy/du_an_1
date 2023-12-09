@@ -142,7 +142,7 @@ if (empty($dataDb)) {
 
                                     </div>
                                     <div class=" bg0 m-b-22">
-                                        <input type="radio" name="thanh_toan" value="2" style="display: inline;" disabled> thanh toán VNpay
+                                        <input type="radio" name="thanh_toan" value="2" style="display: inline;" > thanh toán VNpay
 
                                     </div>
 
