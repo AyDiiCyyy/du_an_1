@@ -76,8 +76,8 @@
                             VN
                         </a>
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            USD
+                        <a href="admin" class="flex-c-m trans-04 p-lr-25">
+                            Đăng nhập Admin
                         </a>
                     </div>
                 </div>
@@ -123,9 +123,7 @@
 
                     <!-- Icon header -->
                     <div class="wrap-icon-header flex-w flex-r-m">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                            <i class="zmdi zmdi-search"></i>
-                        </div>
+                        
                         <a href="?act=listcart">
                             <div id="totalProduct" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti " data-notify="<?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>">
                                 <i class="zmdi zmdi-shopping-cart"></i>

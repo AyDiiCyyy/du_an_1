@@ -53,9 +53,7 @@ if (isset($_COOKIE['user'])) { ?>
                 <li class="nav-item">
                     <a class="nav-link <?= (isset($_GET['trang_thai']) && $_GET['trang_thai'] == 4) ? 'active' : '' ?>" href="?act=don_hang&trang_thai=4">Giao hàng thành công</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= (isset($_GET['trang_thai']) && $_GET['trang_thai'] == 0) ? 'active' : '' ?>" href="?act=don_hang&trang_thai=0">Đã huỷ</a>
-                </li>
+                
             </ul>
             <?php foreach ($sp_hd as $value) : ?>
                 <div class="item-container mt-5" id="id_cthd_<?= $value['id_cthd'] ?>">

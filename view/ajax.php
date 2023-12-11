@@ -2,6 +2,7 @@
 session_start();
 include "../model/taikhoan.php";
 include "../model/config_vnpay.php";
+include "../model/admin_hd.php";
 
 
 
@@ -175,6 +176,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 ';
+            break;
+        case "update_trang_thai":
+            
+            update_hd($_POST['id'],$_POST['gia_tri']);
             break;
         default:
             echo "default";

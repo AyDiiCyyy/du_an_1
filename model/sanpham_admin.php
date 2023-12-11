@@ -137,4 +137,8 @@ function update_bt($sl,$id){
     END";
     pdo_execute($sql);
 }
+function role($id){
+    $sql = "SELECT role FROM user WHERE id_user = $id";
+    return pdo_query_one($sql);
+}
 ?>
